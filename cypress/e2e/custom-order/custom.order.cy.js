@@ -1,25 +1,29 @@
+import CustomOrder from "../../fixtures/pom/custom-order/custom.order.page";
+
 describe("Custom order", () => {
     beforeEach(() => {
       cy.visit("/model3/design#overview");
     });
   
-    it("Should select Rear-Wheel Drive model", () => {
-        cy.get('fieldset [value="$MT322"]').should('be.checked');
+    it("Should verify that Rear-Wheel Drive Model 3 was selected, TESLA-4", () => {
+        CustomOrder.fieldsetModel3.should('be.checked');
     });
-
-    it("Should select Red Multi-Coat Paint", () => {
+    
+    //Flaky one
+    it("Should select and verify Red Multi-Coat Paint, TESLA-5", () => {
         cy.scrollTo(0, 1500)
-        cy.get('[data-id="$PPSW-option"]').should('be.checked');
-        cy.get('[id="PAINT_$PPMR"]').click({force: true});
-        cy.get('[id="PAINT_$PPMR"]').should('be.checked');
-        cy.get('[data-id="PAINT-price"]').should('contains.text', '$2,000');
+        CustomOrder.paintPearlWhite.should('be.checked');
+        CustomOrder.paintRedMultiCoat.click({force: true});
+        CustomOrder.paintRedMultiCoat.should('be.checked');
+        CustomOrder.priceRedMultuCoat.should('contains.text', '$2,000');
     });
 
-    it("Should select 19 Sport Wheels", () => {
+    //Flaky one
+    it("Should select and verify 19 Sport Wheels, TESLA-6", () => {
         cy.scrollTo(0, 2000)
-        cy.get('[id="WHEELS_$W40B"]').should('be.checked');
-        cy.get('[id="WHEELS_$W41B"]').click({force: true});
-        cy.get('[id="WHEELS_$W41B"]').should('be.checked');
-        cy.get('[data-id="WHEELS-price"]').should('contains.text', '$1,500');
+        CustomOrder.wheels18Aero.should('be.checked');
+        CustomOrder.wheels19Sport.click({force: true});
+        CustomOrder.wheels19Sport.should('be.checked');
+        CustomOrder.price19SportWheels.should('contains.text', '$1,500');
     });
   });
